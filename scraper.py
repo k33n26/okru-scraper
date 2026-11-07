@@ -1,3 +1,8 @@
+import asyncio
+import json
+from bs4 import BeautifulSoup
+from playwright.async_api import async_playwright
+
 async def scrape_okru_stream(target_url: str):
     print(f"[*] Hedef URL analiz ediliyor: {target_url}")
     captured_streams = []
