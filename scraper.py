@@ -66,7 +66,7 @@ def extract_embedded_json(soup: BeautifulSoup):
     return metadata
 
 async def main():
-    target_url = "https://ok.ru/live/7609525607948"  # Kendi hedef URL'niz ile değiştirin
+    target_url = "https://ok.ru/video/404041965268"  # Kendi hedef URL'niz ile değiştirin
     
     streams, metadata = await scrape_okru_stream(target_url)
     
