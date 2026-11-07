@@ -66,8 +66,7 @@ def extract_embedded_json(soup: BeautifulSoup):
     return metadata
 
 async def main():
-    # Buraya takip etmek istediğiniz OK.ru video veya yayın linkini yazabilirsiniz
-    target_url = "https://ok.ru/live/example" 
+    target_url = "https://ok.ru/live/example"  # Kendi hedef URL'niz ile değiştirin
     
     streams, metadata = await scrape_okru_stream(target_url)
     
@@ -75,14 +74,12 @@ async def main():
     if streams:
         for s in streams:
             print(f"-> {s}")
+            
+        # Bulunan linkleri streams.txt dosyasına alt alta kaydedelim
+        with open("streams.txt", "w", encoding="utf-8") as f:
+            for stream in streams:
+                f.write(stream + "\n")
+        print("[*] Akış bağlantıları streams.txt dosyasına başarıyla kaydedildi.")
     else:
         print("Ağ trafiğinde doğrudan akış bağlantısı yakalanamadı.")
-        
-    print("\n--- SAYFADAN AYIKLANAN GÖMÜLÜ METADATA ---")
-    if metadata:
-        print(json.dumps(metadata[:2], indent=2, ensure_ascii=False))
-    else:
-        print("Gömülü JSON verisi bulunamadı.")
-
-if __name__ == "__main__":
-    asyncio.run(main())
+        # Eğer link bulunamazsa boş kalmasın veya eskiyi korusun diye isteğe bağlı işlem yapılabilir
